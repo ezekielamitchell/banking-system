@@ -4,5 +4,6 @@ int main() {
     User user;
     user.registerUser();
     user.userInfo();
+    user.userInfo();
     return 0;
 }

@@ -15,6 +15,8 @@ private:
     string name;
     long phoneNumber;
     long accountNumber;
+    double balance;
+    double accountAge;
 
 public:
 
@@ -28,14 +30,14 @@ public:
         cin >> fName;
         cout << "Last name: ";
         cin >> lName;
-        this->name = fName + " " + lName;
+        name = fName + " " + lName;
 
         // phone number
         long phone = 0;
 
         cout << "Phone number: ";
         cin >> phone;
-        while (cin.fail()) {
+        while (cin.fail() || phone < 1000000000 || phone > 9999999999) {
             cin.clear();
             cin.ignore(1000,'\n');
             cout << "error: invalid input received..." << endl;
@@ -43,11 +45,11 @@ public:
             cin >> phone;
         }
 
-        this->phoneNumber = phone;
+        phoneNumber = phone;
 
 
         // set account number
-        this->accountNumber = rand() % 20000000 + 10000001;
+        accountNumber = rand() % 20000000 + 10000001;
 
     }
 
