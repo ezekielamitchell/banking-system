@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <unistd.h>
 
 using namespace std;
 
@@ -10,13 +11,14 @@ using namespace std;
 
 class User {
 
+
 private:
 
     string name;
     long phoneNumber;
     long accountNumber;
     double balance;
-    double accountAge;
+    int accountAge;
 
 public:
 
@@ -51,14 +53,56 @@ public:
         // set account number
         accountNumber = rand() % 20000000 + 10000001;
 
+        // set default account balance
+        balance = 0;
+
+        // set account age
+        accountAge = 0;
+
     }
 
+    // TRANSACTIONS
+    // todo: add transaction history
+
     void userInfo() {
+        cout << endl;
+        cout << "retrieving user information..." << endl;
+        sleep(2);
         cout << endl << "---=== ACCOUNT INFO ===---" << endl;
         cout << "Name: " << name << endl;
-        cout << "Account Number: " << accountNumber << endl;
         cout << "Phone Number: " << phoneNumber << endl;
+        cout << "Account Number: " << accountNumber << endl;
+        cout << "Balance: $" << balance << endl;
     }
+
+
+    void deposit() {
+        double amount;
+        cout << "Deposit amount (enter 0 to cancel): $";
+        cin >> amount;
+        if (amount == 0) {
+            cout << "deposit cancelled..." << endl;
+            return;
+        }
+        balance += amount;
+    }
+
+    void withdraw() {
+        double amount;
+        cout << "Withdraw amount (enter 0 to cancel): $";
+        cin >> amount;
+        if (amount == 0) {
+            cout << "withdraw cancelled..." << endl;
+            return;
+        }
+        if (amount > balance) {
+            cout << "error: insufficient funds..." << endl;
+            return;
+        }
+        balance -= amount;
+    }
+
+
 
 
 };

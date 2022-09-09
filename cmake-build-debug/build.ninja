@@ -58,18 +58,6 @@ build CMakeFiles/banking_system.dir/src/main/cpp/user/User.cpp.o: CXX_COMPILER__
   OBJECT_DIR = CMakeFiles/banking_system.dir
   OBJECT_FILE_DIR = CMakeFiles/banking_system.dir/src/main/cpp/user
 
-build CMakeFiles/banking_system.dir/src/main/cpp/services/Deposit.cpp.o: CXX_COMPILER__banking_system_Debug /Users/house/code/projects/banking_system/src/main/cpp/services/Deposit.cpp || cmake_object_order_depends_target_banking_system
-  DEP_FILE = CMakeFiles/banking_system.dir/src/main/cpp/services/Deposit.cpp.o.d
-  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.0.sdk -std=gnu++20
-  OBJECT_DIR = CMakeFiles/banking_system.dir
-  OBJECT_FILE_DIR = CMakeFiles/banking_system.dir/src/main/cpp/services
-
-build CMakeFiles/banking_system.dir/src/main/cpp/services/Withdrawal.cpp.o: CXX_COMPILER__banking_system_Debug /Users/house/code/projects/banking_system/src/main/cpp/services/Withdrawal.cpp || cmake_object_order_depends_target_banking_system
-  DEP_FILE = CMakeFiles/banking_system.dir/src/main/cpp/services/Withdrawal.cpp.o.d
-  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.0.sdk -std=gnu++20
-  OBJECT_DIR = CMakeFiles/banking_system.dir
-  OBJECT_FILE_DIR = CMakeFiles/banking_system.dir/src/main/cpp/services
-
 build CMakeFiles/banking_system.dir/src/main/cpp/services/BalanceInfo.cpp.o: CXX_COMPILER__banking_system_Debug /Users/house/code/projects/banking_system/src/main/cpp/services/BalanceInfo.cpp || cmake_object_order_depends_target_banking_system
   DEP_FILE = CMakeFiles/banking_system.dir/src/main/cpp/services/BalanceInfo.cpp.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.0.sdk -std=gnu++20
@@ -90,7 +78,7 @@ build CMakeFiles/banking_system.dir/src/main/cpp/services/Menu.cpp.o: CXX_COMPIL
 #############################################
 # Link the executable banking_system
 
-build banking_system: CXX_EXECUTABLE_LINKER__banking_system_Debug CMakeFiles/banking_system.dir/src/main/cpp/main.cpp.o CMakeFiles/banking_system.dir/src/main/cpp/user/User.cpp.o CMakeFiles/banking_system.dir/src/main/cpp/services/Deposit.cpp.o CMakeFiles/banking_system.dir/src/main/cpp/services/Withdrawal.cpp.o CMakeFiles/banking_system.dir/src/main/cpp/services/BalanceInfo.cpp.o CMakeFiles/banking_system.dir/src/main/cpp/services/Menu.cpp.o
+build banking_system: CXX_EXECUTABLE_LINKER__banking_system_Debug CMakeFiles/banking_system.dir/src/main/cpp/main.cpp.o CMakeFiles/banking_system.dir/src/main/cpp/user/User.cpp.o CMakeFiles/banking_system.dir/src/main/cpp/services/BalanceInfo.cpp.o CMakeFiles/banking_system.dir/src/main/cpp/services/Menu.cpp.o
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.0.sdk
   OBJECT_DIR = CMakeFiles/banking_system.dir
   POST_BUILD = :
