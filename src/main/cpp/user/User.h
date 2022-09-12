@@ -63,14 +63,10 @@ public:
         // set account age
         accountAge = 0;
 
-        transactionHistory.emplace_back("test1");
-
     }
 
     // TRANSACTIONS
     void history() {
-        transactionHistory.emplace_back("test");
-
         cout << endl << "---=== TRANSACTION HISTORY ===---" << endl;
         for (auto &i : transactionHistory) {
             cout << i << endl;
