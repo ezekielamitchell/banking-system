@@ -2,6 +2,7 @@
 #include <string>
 #include <cmath>
 #include <unistd.h>
+#include <list>
 
 using namespace std;
 
@@ -19,6 +20,7 @@ private:
     long accountNumber;
     double balance;
     int accountAge;
+    list<string> transactionHistory;
 
 public:
 
@@ -30,8 +32,10 @@ public:
 
         cout << "First name: ";
         cin >> fName;
+        fName[0] = toupper(fName[0]);
         cout << "Last name: ";
         cin >> lName;
+        lName[0] = toupper(lName[0]);
         name = fName + " " + lName;
 
         // phone number
@@ -59,10 +63,20 @@ public:
         // set account age
         accountAge = 0;
 
+        transactionHistory.emplace_back("test1");
+
     }
 
     // TRANSACTIONS
-    // todo: add transaction history
+    void history() {
+        transactionHistory.emplace_back("test");
+
+        cout << endl << "---=== TRANSACTION HISTORY ===---" << endl;
+        for (auto &i : transactionHistory) {
+            cout << i << endl;
+        }
+    }
+
 
     void userInfo() {
         cout << endl;
@@ -85,6 +99,7 @@ public:
             return;
         }
         balance += amount;
+        transactionHistory.emplace_back("Credited: $" + to_string(amount));
     }
 
     void withdraw() {
@@ -100,6 +115,7 @@ public:
             return;
         }
         balance -= amount;
+        transactionHistory.emplace_back("Debit: $" + to_string(amount));
     }
 
 
