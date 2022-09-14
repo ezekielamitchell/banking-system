@@ -12,14 +12,13 @@ using namespace std;
 
 class User {
 
-
 private:
 
     string name;
-    long phoneNumber;
+    string phoneNumber;
     long accountNumber;
     double balance;
-    int accountAge;
+//    int accountAge;
     list<string> transactionHistory;
 
 public:
@@ -29,6 +28,9 @@ public:
         // set name
         string fName;
         string lName;
+
+        // new transaction history
+        transactionHistory.clear();
 
         cout << "First name: ";
         cin >> fName;
@@ -45,13 +47,18 @@ public:
         cin >> phone;
         while (cin.fail() || phone < 1000000000 || phone > 9999999999) {
             cin.clear();
-            cin.ignore(1000,'\n');
+            cin.ignore(1000, '\n');
             cout << "error: invalid input received..." << endl;
             cout << "Phone number: ";
             cin >> phone;
         }
 
-        phoneNumber = phone;
+
+        phoneNumber = to_string(phone).substr(0, 3)
+                + '-'
+                + to_string(phone).substr(3, 3)
+                + '-'
+                + to_string(phone).substr(6, 4);
 
 
         // set account number
@@ -61,19 +68,21 @@ public:
         balance = 0;
 
         // set account age
-        accountAge = 0;
+//        accountAge = 0;
 
     }
 
     // TRANSACTIONS
     void history() {
+
         cout << endl << "---=== TRANSACTION HISTORY ===---" << endl;
-        for (auto &i : transactionHistory) {
+        for (auto &i: transactionHistory) {
             cout << i << endl;
         }
     }
 
 
+    // USER INFO
     void userInfo() {
         cout << endl;
         cout << "retrieving user information..." << endl;
@@ -86,6 +95,7 @@ public:
     }
 
 
+    // DEPOSIT
     void deposit() {
         double amount;
         cout << "Deposit amount (enter 0 to cancel): $";
@@ -98,6 +108,7 @@ public:
         transactionHistory.emplace_back("Credited: $" + to_string(amount));
     }
 
+    // WITHDRAW
     void withdraw() {
         double amount;
         cout << "Withdraw amount (enter 0 to cancel): $";
@@ -114,9 +125,52 @@ public:
         transactionHistory.emplace_back("Debit: $" + to_string(amount));
     }
 
+    void displayMenu() {
 
+        cout << endl << "*---=== Bank of Endr ===---*" << endl;
+        cout << "Menu:" << endl;
+        cout << "1. New Account Registration" << endl;
+        cout << "2. Display Account Information" << endl;
+        cout << "3. Deposit" << endl;
+        cout << "4. Withdraw" << endl;
+        cout << "5. Transaction History" << endl;
+        cout << "6. Exit" << endl;
+        cout << endl << "enter option number: ";
 
+        // user choice
+        int choice;
+        cin >> choice;
+        while (cin.fail() || choice < 1 || choice > 6) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "error: invalid input received..." << endl;
+            cout << endl << "enter option number: ";
+            cin >> choice;
+        }
 
+        switch (choice) {
+            case 1:
+                registerUser();
+                displayMenu();
+            case 2:
+                userInfo();
+                displayMenu();
+            case 3:
+                deposit();
+                displayMenu();
+            case 4:
+                withdraw();
+                displayMenu();
+            case 5:
+                history();
+                displayMenu();
+            case 6:
+                cout << "logging out..." << endl;
+                sleep(2);
+                cout << "goodbye";
+                return;
+        }
+    }
 };
 
 

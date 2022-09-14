@@ -3,4 +3,4 @@ project(banking_system)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(banking_system src/main/cpp/main.cpp src/main/cpp/user/User.cpp src/main/cpp/user/User.h src/main/cpp/services/Menu.cpp src/main/cpp/services/Menu.h)
+add_executable(banking_system src/main/cpp/main.cpp src/main/cpp/user/User.cpp src/main/cpp/user/User.h)
