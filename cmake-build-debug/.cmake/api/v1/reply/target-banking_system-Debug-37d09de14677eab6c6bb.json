@@ -35,7 +35,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.0.sdk"
+					"fragment" : "-g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -fcolor-diagnostics"
 				},
 				{
 					"fragment" : "-std=gnu++20"
@@ -94,7 +94,8 @@
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
-				2
+				2,
+				3
 			]
 		}
 	],
@@ -115,6 +116,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "src/main/cpp/user/User.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/main/cpp/menu/Menu.h",
 			"sourceGroupIndex" : 1
 		}
 	],

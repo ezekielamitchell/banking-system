@@ -3,6 +3,9 @@
 #include <cmath>
 #include <unistd.h>
 #include <list>
+#include <algorithm>
+#include <vector>
+#include "/Users/house/code/proj/banking-system/src/main/cpp/menu/Menu.cpp"
 
 using namespace std;
 
@@ -10,77 +13,22 @@ using namespace std;
 #define BANKING_SYSTEM_USER_H
 
 
+
 class User {
 
 private:
-
-    string name;
-    string phoneNumber;
-    long accountNumber;
-    double balance;
-//    int accountAge;
+    double balance{0};
     list<string> transactionHistory;
 
 public:
 
-    void registerUser() {
-
-        // set name
-        string fName;
-        string lName;
-
-        // new transaction history
-        transactionHistory.clear();
-
-        cout << "First name: ";
-        cin >> fName;
-        fName[0] = toupper(fName[0]);
-        cout << "Last name: ";
-        cin >> lName;
-        lName[0] = toupper(lName[0]);
-        name = fName + " " + lName;
-
-        // phone number
-        long phone = 0;
-
-        cout << "Phone number: ";
-        cin >> phone;
-        while (cin.fail() || phone < 1000000000 || phone > 9999999999) {
-            cin.clear();
-            cin.ignore(1000, '\n');
-            cout << "error: invalid input received..." << endl;
-            cout << "Phone number: ";
-            cin >> phone;
-        }
-
-
-        phoneNumber = to_string(phone).substr(0, 3)
-                + '-'
-                + to_string(phone).substr(3, 3)
-                + '-'
-                + to_string(phone).substr(6, 4);
-
-
-        // set account number
-        accountNumber = rand() % 20000000 + 10000001;
-
-        // set default account balance
-        balance = 0;
-
-        // set account age
-//        accountAge = 0;
-
-    }
-
     // TRANSACTIONS
     void history() {
-
         cout << endl << "---=== TRANSACTION HISTORY ===---" << endl;
         for (auto &i: transactionHistory) {
             cout << i << endl;
         }
     }
-
 
     // USER INFO
     void userInfo() {
@@ -88,12 +36,15 @@ public:
         cout << "retrieving user information..." << endl;
         sleep(2);
         cout << endl << "---=== ACCOUNT INFO ===---" << endl;
-        cout << "Name: " << name << endl;
-        cout << "Phone Number: " << phoneNumber << endl;
-        cout << "Account Number: " << accountNumber << endl;
         cout << "Balance: $" << balance << endl;
-    }
+        cout << "Account Number: " << account.accountNumber << endl;
+        cout << "First Name: " << account.fName << endl;
+        cout << "Last Name: " << account.lName << endl;
+        cout << "Username: " << account.userName << endl;
+        cout << "Password: " << account.password << endl;
 
+        // account info
+    }
 
     // DEPOSIT
     void deposit() {
@@ -126,15 +77,13 @@ public:
     }
 
     void displayMenu() {
-
-        cout << endl << "*---=== Bank of Endr ===---*" << endl;
-        cout << "Menu:" << endl;
-        cout << "1. New Account Registration" << endl;
-        cout << "2. Display Account Information" << endl;
-        cout << "3. Deposit" << endl;
-        cout << "4. Withdraw" << endl;
-        cout << "5. Transaction History" << endl;
-        cout << "6. Exit" << endl;
+        cout << "User Menu:" << endl;
+        cout << "1) Display Account Information" << endl;
+        cout << "2) Deposit" << endl;
+        cout << "3) Withdraw" << endl;
+        cout << "4) Transaction History" << endl;
+        cout << "5) Log Out" << endl;
+        cout << "6) Exit" << endl;
         cout << endl << "enter option number: ";
 
         // user choice
@@ -142,33 +91,63 @@ public:
         cin >> choice;
         while (cin.fail() || choice < 1 || choice > 6) {
             cin.clear();
-            cin.ignore(1000, '\n');
-            cout << "error: invalid input received..." << endl;
-            cout << endl << "enter option number: ";
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cerr << "Invalid input received; please enter between choices 1-6" <<endl;
             cin >> choice;
         }
 
-        switch (choice) {
-            case 1:
-                registerUser();
+        bool loggedIn{true};
+        while (loggedIn) {
+            switch (choice) {
+                case 1:
+                    userInfo();
+                    break;
+                case 2:
+                    deposit();
+                    break;
+                case 3:
+                    withdraw();
+                    break;
+                case 4:
+                    history();
+                    break;
+                case 5:
+                    cout << "logging out..." << endl;
+                    sleep(1);
+                    cout << "logging out.." << endl;
+                    sleep(1);
+                    cout << "logging out." << endl;
+                    sleep(1);
+                    loggedIn = false;
+                    break;
+                case 6:
+                    cout << "Exiting systems...";
+                    exit(0);
+            }
+            if (loggedIn) {
                 displayMenu();
-            case 2:
-                userInfo();
-                displayMenu();
-            case 3:
-                deposit();
-                displayMenu();
-            case 4:
-                withdraw();
-                displayMenu();
-            case 5:
-                history();
-                displayMenu();
-            case 6:
-                cout << "logging out..." << endl;
-                sleep(2);
-                cout << "goodbye";
-                return;
+            } else {
+                break;
+            }
+        }
+
+        while (true) {
+            switch (menu()) {
+                case 1:
+                    users.push_back(registerAccount());
+                    break;
+                case 2:
+                    if (login()) {
+                        // display user menu
+                        displayMenu();
+                    } else {
+                        continue;
+                    }
+                    break;
+                case 3:
+                    cout << "Exiting systems...";
+                    exit(0);
+            }
         }
     }
 };
